@@ -1,0 +1,110 @@
+Consultas das Tabelas:
+
+
+MariaDB [etecmcm2]> select * from produtos;
++------------+---------------------------+--------+-------+-----------------+--------------+----------------+
+| id_produto | nome                      | preco  | quant | marca           | id_categoria | unidade_medida |
++------------+---------------------------+--------+-------+-----------------+--------------+----------------+
+|          1 | Sabão em pó               |  25.00 |     4 | OMO             |            1 | un             |
+|          2 | Detergente                |   3.00 |    25 | Ypê             |            1 | un             |
+|          3 | Mussarela                 |  10.00 |    80 | Sadia           |            2 | kg             |
+|          4 | Oculos                    | 200.00 |     1 | Extra Otica     |            3 | un             |
+|          5 | Carne de panela           |  25.00 |     7 | Perdigão        |            4 | kg             |
+|          6 | Milho                     |   4.00 |    55 | Qualitá         |            5 | kg             |
+|          7 | Celular                   | 900.00 |    67 | Samsung         |            6 | un             |
+|          8 | Body Splash Floratta Blue |  90.00 |    59 | O boticario     |            7 | un             |
+|          9 | Refrigerante              |   3.00 |   478 | Guaraná Jesus   |            8 | un             |
+|         10 | Uva                       |  10.00 |    92 | turma da Mônica |            9 | kg             |
+|         11 | batata frita              |  30.00 |    58 | Aurora          |           10 | kg             |
++------------+---------------------------+--------+-------+-----------------+--------------+----------------+
+11 rows in set (0.000 sec)
+
+MariaDB [etecmcm2]> select nome,preco from produtos;
++---------------------------+--------+
+| nome                      | preco  |
++---------------------------+--------+
+| Sabão em pó               |  25.00 |
+| Detergente                |   3.00 |
+| Mussarela                 |  10.00 |
+| Oculos                    | 200.00 |
+| Carne de panela           |  25.00 |
+| Milho                     |   4.00 |
+| Celular                   | 900.00 |
+| Body Splash Floratta Blue |  90.00 |
+| Refrigerante              |   3.00 |
+| Uva                       |  10.00 |
+| batata frita              |  30.00 |
++---------------------------+--------+
+11 rows in set (0.000 sec)
+
+
+MariaDB [etecmcm2]> select * from produtos where marca = 'Sadia';
++------------+-----------+-------+-------+-------+--------------+----------------+
+| id_produto | nome      | preco | quant | marca | id_categoria | unidade_medida |
++------------+-----------+-------+-------+-------+--------------+----------------+
+|          3 | Mussarela | 10.00 |    80 | Sadia |            2 | kg             |
++------------+-----------+-------+-------+-------+--------------+----------------+
+1 row in set (0.000 sec)
+
+MariaDB [etecmcm2]> select * from produtos where marca = 'Aurora';
++------------+--------------+-------+-------+--------+--------------+----------------+
+| id_produto | nome         | preco | quant | marca  | id_categoria | unidade_medida |
++------------+--------------+-------+-------+--------+--------------+----------------+
+|         11 | batata frita | 30.00 |    58 | Aurora |           10 | kg             |
++------------+--------------+-------+-------+--------+--------------+----------------+
+1 row in set (0.000 sec)
+
+MariaDB [etecmcm2]> select * from produtos where preco> 20;
++------------+---------------------------+--------+-------+-------------+--------------+----------------+
+| id_produto | nome                      | preco  | quant | marca       | id_categoria | unidade_medida |
++------------+---------------------------+--------+-------+-------------+--------------+----------------+
+|          1 | Sabão em pó               |  25.00 |     4 | OMO         |            1 | un             |
+|          4 | Oculos                    | 200.00 |     1 | Extra Otica |            3 | un             |
+|          5 | Carne de panela           |  25.00 |     7 | Perdigão    |            4 | kg             |
+|          7 | Celular                   | 900.00 |    67 | Samsung     |            6 | un             |
+|          8 | Body Splash Floratta Blue |  90.00 |    59 | O boticario |            7 | un             |
+|         11 | batata frita              |  30.00 |    58 | Aurora      |           10 | kg             |
++------------+---------------------------+--------+-------+-------------+--------------+----------------+
+6 rows in set (0.000 sec)
+
+
+MariaDB [etecmcm2]> select * from produtos where quant <= 60;
++------------+---------------------------+--------+-------+-------------+--------------+----------------+
+| id_produto | nome                      | preco  | quant | marca       | id_categoria | unidade_medida |
++------------+---------------------------+--------+-------+-------------+--------------+----------------+
+|          1 | Sabão em pó               |  25.00 |     4 | OMO         |            1 | un             |
+|          2 | Detergente                |   3.00 |    25 | Ypê         |            1 | un             |
+|          4 | Oculos                    | 200.00 |     1 | Extra Otica |            3 | un             |
+|          5 | Carne de panela           |  25.00 |     7 | Perdigão    |            4 | kg             |
+|          6 | Milho                     |   4.00 |    55 | Qualitá     |            5 | kg             |
+|          8 | Body Splash Floratta Blue |  90.00 |    59 | O boticario |            7 | un             |
+|         11 | batata frita              |  30.00 |    58 | Aurora      |           10 | kg             |
++------------+---------------------------+--------+-------+-------------+--------------+----------------+
+7 rows in set (0.000 sec)
+
+
+MariaDB [etecmcm2]> select nome, preco from produtos order by preco asc limit 5;
++--------------+-------+
+| nome         | preco |
++--------------+-------+
+| Detergente   |  3.00 |
+| Refrigerante |  3.00 |
+| Milho        |  4.00 |
+| Mussarela    | 10.00 |
+| Uva          | 10.00 |
++--------------+-------+
+5 rows in set (0.000 sec)
+
+
+MariaDB [etecmcm2]> select nome, preco from produtos order by preco desc limit 5;
++---------------------------+--------+
+| nome                      | preco  |
++---------------------------+--------+
+| Celular                   | 900.00 |
+| Oculos                    | 200.00 |
+| Body Splash Floratta Blue |  90.00 |
+| batata frita              |  30.00 |
+| Sabão em pó               |  25.00 |
++---------------------------+--------+
+5 rows in set (0.000 sec)
+
