@@ -1,0 +1,74 @@
+LAVARAPIDO, CODIGO
+
+
+
+
+-- marca
+create table marca (
+    codmarca int PRIMARY KEY AUTO_INCREMENT,
+    marca varchar(255) not null);
+    
+-- modelo 
+create table modelo (
+    codmodelo int PRIMARY KEY AUTO_INCREMENT,
+    modelo varchar(255) not null),
+    codmarca int,
+    FOREIGN KEY(codmarca) REFERENCES marca(codmarca));
+    
+-- servico
+create table servico (
+    codservico int PRIMARY KEY AUTO_INCREMENT,
+    servico varchar(255) not null,
+    valor decimal(10,2) not null);
+    
+-- atendimento 
+create table atendimento (
+    codatendimento int PRIMARY KEY AUTO_INCREMENT,
+    totalgeral decimal (10,2) not null,
+    dataatendimento DATA not null);
+    
+-- atendimento_servico
+create table atendimentoservico (
+    quantidade int not null,
+    totalservico decimal(10,2),
+    codatendimento int,
+    codservico int,
+    FOREIGN KEY (codatendimento) REFERENCES atendimento(codatendimento),
+    FOREIGN KEY (codservico) REFERENCES servico(codservico));
+    
+-- endereco
+create table endereco (
+    codendereco int PRIMARY KEY AUTO_INCREMENT,
+    rua varchar(255) not null,
+    num int not null,
+    bairro varchar(255) not null,
+    cidade varchar(255) not null,
+    estado varchar(255) not null,
+    cep int not null);
+    
+-- cliente
+create table cliente (
+    codcliente int PRIMARY KEY AUTO_INCREMENT,
+    nome varchar(255) not null,
+    datadenascimento int not null,
+    telefone int not null),
+    email varchar(255) not null),
+    codendereco int,
+    FOREIGN KEY(codendereco) endereco(codendereco));
+    
+-- carro
+create table carro (
+    codcarro int PRIMARY KEY AUTO_INCREMENT,
+    ano int not null,
+    codcliente int,
+    codmodelo int,
+    FOREIGN KEY(codcliente) REFERENCES cliente(codcliente));
+    FOREIGN KEY(codmodelo) REFERENCES modelo(codmodelo));
+    
+
+    
+    
+
+    
+
+    
